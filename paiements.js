@@ -7,7 +7,7 @@ const paymentForm =
 // =====================================================
 
 const GOOGLE_SCRIPT_URL =
-    "TON_URL_GOOGLE_APPS_SCRIPT";
+    "https://script.google.com/macros/s/AKfycbyKgyVEwUeueyuFqys3WBiIQi58tVv1OT0hMN-A1gajOEauUN9YOBFjS7efzTJH_1ALOQ/exec";
 
 
 // =====================================================
