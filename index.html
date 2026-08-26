@@ -6,50 +6,127 @@
     <title>Gestion des Étudiants</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <div class="container">
+
+        <nav class="navbar">
+            <div class="logo">📚 EduGest</div>
+
+            <div class="menu">
+                <a href="index.html">👨‍🎓 Étudiants</a>
+                <a href="paiement.html">💳 Paiement</a>
+                <a href="meteo.html">🌤️ Météo</a>
+                <a href="#" id="whatsappLink">💬 WhatsApp</a>
+            </div>
+        </nav>
+
         <h1>📚 Gestion des Étudiants</h1>
 
-        <!-- Formulaire d'ajout -->
+        <!-- FORMULAIRE -->
         <div class="form-container">
+
             <h2>Ajouter un étudiant</h2>
+
             <form id="studentForm">
+
                 <div class="form-group">
                     <label for="nom">Nom complet :</label>
-                    <input type="text" id="nom" placeholder="Ex: Jean Dupont" required>
+
+                    <input
+                        type="text"
+                        id="nom"
+                        placeholder="Ex : Jean Dupont"
+                        required
+                    >
                 </div>
+
                 <div class="form-group">
                     <label for="age">Âge :</label>
-                    <input type="number" id="age" placeholder="Ex: 20" min="1" max="120" required>
+
+                    <input
+                        type="number"
+                        id="age"
+                        placeholder="Ex : 20"
+                        min="1"
+                        max="120"
+                        required
+                    >
                 </div>
+
                 <div class="form-group">
                     <label for="filiere">Filière :</label>
+
                     <select id="filiere" required>
-                        <option value="">Choisir une filière</option>
-                        <option value="Informatique">Informatique</option>
-                        <option value="Mathématiques">Mathématiques</option>
-                        <option value="Physique">Physique</option>
-                        <option value="Biologie">Biologie</option>
-                        <option value="Économie">Économie</option>
+
+                        <option value="">
+                            Choisir une filière
+                        </option>
+
+                        <option value="Informatique">
+                            Informatique
+                        </option>
+
+                        <option value="Mathématiques">
+                            Mathématiques
+                        </option>
+
+                        <option value="Physique">
+                            Physique
+                        </option>
+
+                        <option value="Biologie">
+                            Biologie
+                        </option>
+
+                        <option value="Économie">
+                            Économie
+                        </option>
+
                     </select>
                 </div>
-                <button type="submit" class="btn-add" id="submitBtn">➕ Ajouter l'étudiant</button>
+
+                <button type="submit" class="btn-add">
+                    ➕ Ajouter l'étudiant
+                </button>
+
             </form>
+
         </div>
 
-        <!-- Liste des étudiants -->
+        <!-- STATISTIQUES -->
         <div class="list-container">
+
             <h2>Liste des étudiants</h2>
+
             <div class="stats">
-                <span>Total : <strong id="totalStudents">0</strong></span>
-                <button id="deleteAllBtn" class="btn-delete-all">🗑️ Supprimer tout</button>
+
+                <span>
+                    Total :
+                    <strong id="totalStudents">0</strong>
+                </span>
+
+                <button
+                    id="deleteAllBtn"
+                    class="btn-delete-all"
+                >
+                    🗑️ Supprimer tout
+                </button>
+
             </div>
-            <div id="studentList" class="student-list">
-                <!-- Les étudiants seront affichés ici dynamiquement -->
+
+            <div
+                id="studentList"
+                class="student-list"
+            >
             </div>
+
         </div>
+
     </div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
