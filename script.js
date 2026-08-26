@@ -3,7 +3,7 @@ const studentList = document.getElementById("studentList");
 const totalStudents = document.getElementById("totalStudents");
 const deleteAllBtn = document.getElementById("deleteAllBtn");
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUTAJpBsCPpj62l86bmgBz97ApBjaopi8x_ZkRxhjQM5I9UR3nuIkcQeE9ysKHfL2y6Q/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBr1rvAlEVfS4ULRtnV_2CWYstBYoRQJ2mkYpTbC36fY733papL07Jy3bB8E5HV-id6w/exec";
 
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
