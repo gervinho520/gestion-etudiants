@@ -1,101 +1,272 @@
 const form = document.getElementById("studentForm");
+
 const studentList = document.getElementById("studentList");
-const totalStudents = document.getElementById("totalStudents");
-const deleteAllBtn = document.getElementById("deleteAllBtn");
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBr1rvAlEVfS4ULRtnV_2CWYstBYoRQJ2mkYpTbC36fY733papL07Jy3bB8E5HV-id6w/exec";
+const totalStudents =
+    document.getElementById("totalStudents");
 
-let students = JSON.parse(localStorage.getItem("students")) || [];
+const deleteAllBtn =
+    document.getElementById("deleteAllBtn");
+
+
+// =====================================================
+// URL GOOGLE APPS SCRIPT
+// =====================================================
+
+const GOOGLE_SCRIPT_URL =
+    "TON_URL_GOOGLE_APPS_SCRIPT";
+
+
+// =====================================================
+// RECUPERATION DES ETUDIANTS
+// =====================================================
+
+let students =
+    JSON.parse(localStorage.getItem("students")) || [];
+
+
+// =====================================================
+// AFFICHER LES ETUDIANTS
+// =====================================================
 
 function afficherEtudiants() {
+
     studentList.innerHTML = "";
 
     students.forEach((student, index) => {
-        const studentCard = document.createElement("div");
-        studentCard.className = "student-card";
 
-        studentCard.innerHTML = `
+        const card =
+            document.createElement("div");
+
+        card.className = "student-card";
+
+        card.innerHTML = `
+
             <div>
-                <h3>${student.nom}</h3>
-                <p><strong>Âge :</strong> ${student.age} ans</p>
-                <p><strong>Filière :</strong> ${student.filiere}</p>
+
+                <h3>
+                    👨‍🎓 ${student.nom}
+                </h3>
+
+                <p>
+                    <strong>Âge :</strong>
+                    ${student.age} ans
+                </p>
+
+                <p>
+                    <strong>Filière :</strong>
+                    ${student.filiere}
+                </p>
+
             </div>
 
-            <button onclick="supprimerEtudiant(${index})">
+            <button
+                class="btn-delete"
+                onclick="supprimerEtudiant(${index})"
+            >
                 🗑️ Supprimer
             </button>
+
         `;
 
-        studentList.appendChild(studentCard);
+        studentList.appendChild(card);
+
     });
 
-    totalStudents.textContent = students.length;
+    totalStudents.textContent =
+        students.length;
 }
+
+
+// =====================================================
+// AJOUTER UN ETUDIANT
+// =====================================================
 
 form.addEventListener("submit", async function(event) {
+
     event.preventDefault();
 
-    const nom = document.getElementById("nom").value.trim();
-    const age = document.getElementById("age").value;
-    const filiere = document.getElementById("filiere").value;
+    const nom =
+        document.getElementById("nom").value.trim();
+
+    const age =
+        document.getElementById("age").value;
+
+    const filiere =
+        document.getElementById("filiere").value;
+
 
     const etudiant = {
+
+        type: "etudiant",
+
         nom: nom,
+
         age: age,
+
         filiere: filiere
+
     };
 
-    // Enregistrer localement
+
+    // Sauvegarde locale
+
     students.push(etudiant);
-    localStorage.setItem("students", JSON.stringify(students));
+
+    localStorage.setItem(
+        "students",
+        JSON.stringify(students)
+    );
+
 
     afficherEtudiants();
 
-    // Envoyer vers Google Sheets
+
+    // Envoi Google Sheets
+
     try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: "POST",
-            body: JSON.stringify(etudiant)
-        });
 
-        const resultat = await response.json();
+        await fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+                method: "POST",
 
-        if (resultat.success) {
-            alert("✅ Étudiant ajouté et enregistré dans Google Sheets !");
-        } else {
-            alert("⚠️ Étudiant ajouté localement, mais erreur Google Sheets.");
-        }
+                mode: "no-cors",
 
-    } catch (error) {
-        console.error(error);
-        alert("⚠️ Étudiant ajouté localement, mais Google Sheets n'est pas accessible.");
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify(etudiant)
+            }
+        );
+
+        alert(
+            "✅ Étudiant ajouté avec succès !\n\n" +
+            "Les données ont été envoyées vers Google Sheets."
+        );
+
     }
+
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "⚠️ Étudiant enregistré localement.\n" +
+            "Vérifie la configuration Google Sheets."
+        );
+
+    }
+
 
     form.reset();
+
 });
+
+
+// =====================================================
+// SUPPRIMER UN ETUDIANT
+// =====================================================
 
 function supprimerEtudiant(index) {
-    students.splice(index, 1);
 
-    localStorage.setItem("students", JSON.stringify(students));
+    if (
+        confirm(
+            "Voulez-vous supprimer cet étudiant ?"
+        )
+    ) {
 
-    afficherEtudiants();
-}
+        students.splice(index, 1);
 
-deleteAllBtn.addEventListener("click", function() {
-
-    if (students.length === 0) {
-        alert("Aucun étudiant à supprimer.");
-        return;
-    }
-
-    if (confirm("Voulez-vous vraiment supprimer tous les étudiants ?")) {
-        students = [];
-
-        localStorage.setItem("students", JSON.stringify(students));
+        localStorage.setItem(
+            "students",
+            JSON.stringify(students)
+        );
 
         afficherEtudiants();
+
     }
-});
+
+}
+
+
+// =====================================================
+// SUPPRIMER TOUS
+// =====================================================
+
+deleteAllBtn.addEventListener(
+    "click",
+    function() {
+
+        if (students.length === 0) {
+
+            alert(
+                "Il n'y a aucun étudiant."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            confirm(
+                "Voulez-vous supprimer tous les étudiants ?"
+            )
+        ) {
+
+            students = [];
+
+            localStorage.setItem(
+                "students",
+                JSON.stringify(students)
+            );
+
+            afficherEtudiants();
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// WHATSAPP
+// =====================================================
+
+document
+    .getElementById("whatsappLink")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            const numero =
+                "257XXXXXXXX";
+
+            const message =
+                "Bonjour, je vous contacte depuis mon application de gestion des étudiants.";
+
+            const url =
+                "https://wa.me/" +
+                numero +
+                "?text=" +
+                encodeURIComponent(message);
+
+            window.open(
+                url,
+                "_blank"
+            );
+
+        }
+    );
+
+
+// =====================================================
+// AFFICHAGE INITIAL
+// =====================================================
 
 afficherEtudiants();
