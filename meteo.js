@@ -319,7 +319,7 @@ whatsappWeather.addEventListener(
 
             "💧 Humidité : " +
             derniereMeteo.humidity +
-            " %%0A" +
+            " %25%0A" +
 
             "💨 Vent : " +
             derniereMeteo.wind +
@@ -327,7 +327,7 @@ whatsappWeather.addEventListener(
 
 
         const numero =
-            "257XXXXXXXX";
+            "25768622421";
 
 
         const url =
