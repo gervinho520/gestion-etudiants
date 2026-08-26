@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Météo - EduGest</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <nav class="navbar">
+
+        <div class="logo">
+            📚 EduGest
+        </div>
+
+        <div class="menu">
+
+            <a href="index.html">
+                👨‍🎓 Étudiants
+            </a>
+
+            <a href="paiement.html">
+                💳 Paiement
+            </a>
+
+            <a href="meteo.html">
+                🌤️ Météo
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <h1>
+        🌤️ Météo
+    </h1>
+
+
+    <div class="weather-container">
+
+        <h2>
+            Météo actuelle
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="ville">
+                Ville :
+            </label>
+
+            <input
+                type="text"
+                id="ville"
+                value="Bujumbura"
+                placeholder="Ex : Bujumbura"
+            >
+
+        </div>
+
+
+        <button
+            id="weatherBtn"
+            class="btn-add"
+        >
+
+            🌤️ Rechercher la météo
+
+        </button>
+
+
+        <div
+            id="weatherResult"
+            class="weather-result"
+        >
+
+            <p>
+                Cliquez sur le bouton pour obtenir la météo.
+            </p>
+
+        </div>
+
+
+        <button
+            id="whatsappWeather"
+            class="btn-whatsapp"
+            style="display:none;"
+        >
+
+            💬 Envoyer la météo sur WhatsApp
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="meteo.js"></script>
+
+</body>
+</html>
